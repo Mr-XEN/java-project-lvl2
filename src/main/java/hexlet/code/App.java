@@ -1,11 +1,13 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.security.MessageDigest;
@@ -26,8 +28,13 @@ public class App {
     private String format;
 
 
-    public static void main(String[] args) {
-        int exitCode = new CommandLine(new App()).execute(args);
-        System.exit(exitCode);
+    public static void main(String[] args) throws IOException {
+//        System.out.println(Differ.generate());
+//        int exitCode = new CommandLine(new App()).execute(args);
+//        System.exit(exitCode);
+
+        System.out.println(Differ.parse(Differ.readJson()));
+
+
     }
 }
