@@ -33,7 +33,10 @@ public class App {
 //        int exitCode = new CommandLine(new App()).execute(args);
 //        System.exit(exitCode);
 
-        System.out.println(Differ.parse(Differ.readJson()));
+        System.out.println(Differ.parse(Differ.file1));
+        System.out.println(Differ.parse(Differ.file2));
+
+
 
 
     }
