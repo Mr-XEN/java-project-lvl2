@@ -1,6 +1,6 @@
 {
-  "host": "google.com",
-  "timeout": 99,
-  "proxy": "555.444.333.111",
-  "follow": true
+  "host": "hexlet.io",
+  "timeout": 50,
+  "proxy": "123.234.53.22",
+  "follow": false
 }

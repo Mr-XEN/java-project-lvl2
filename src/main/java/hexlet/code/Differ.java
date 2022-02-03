@@ -5,51 +5,65 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Differ {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
-    public static  String file1 = "src/main/resources/file1.json";
-    public static  String file2 = "src/main/resources/file2.json";
 
-    public static String generate() {
-        return "Kek";
+    public static String file1 = "src/main/resources/file1.json";
+    public static String file2 = "src/main/resources/file2.json";
+
+    public static String generate(Map<String, String> map1, Map<String, String> map2) {
+
+        Set<String> mergeMap = new TreeSet<>();
+        mergeMap.addAll(map1.keySet());
+        mergeMap.addAll(map2.keySet());
+
+        StringBuilder x = new StringBuilder();
+        x.append("\n").append("{");
+
+        for (String key : mergeMap) {
+
+            if (!map1.containsKey(key)) {
+                x.append("\n").append("  + ").append(key).append(": ").append(map2.get(key));
+            } else if (!map2.containsKey(key)) {
+                x.append("\n").append("  - ").append(key).append(": ").append(map1.get(key));
+            } else if (map1.get(key).equals(map2.get(key))) {
+                x.append("\n").append("    ").append(key).append(": ").append(map1.get(key));
+            } else {
+                x.append("\n").append("  - ").append(key).append(": ").append(map1.get(key));
+                x.append("\n").append("  + ").append(key).append(": ").append(map2.get(key));
+            }
+        }
+
+        x.append("\n").append("}");
+
+        return x.toString();
     }
 
-    public static Map<String, String> parse(String file) throws IOException {
 
-        return objectMapper.readValue(readFile(file), new TypeReference<>() {
+    public static Map<String, String> parse(byte[] file) throws IOException {
+
+        return objectMapper.readValue(file, new TypeReference<>() {
+            @Override
+            public Type getType() {
+                return super.getType();
+            }
         });
-    }
-
-    public static Map<String, Object> parse2(byte[] file) throws IOException {
-
-        Map<String, String> results = objectMapper.readValue(file,
-                new TypeReference<Map<String, String>>() { } );
-
-        return null;
-    }
-
-    public static HashMap parse3(byte[] file) throws IOException {
-
-         return objectMapper.readValue(file, HashMap.class);
 
     }
 
-    public static String readFile (String file) throws IOException {
+    public static String readFile(String file) throws IOException {
         return new String(Files.readAllBytes(Paths.get(file)));
     }
 
     public static String x(String s) throws IOException {
-         return objectMapper.readValue(new File(s), String.class);
+        return objectMapper.readValue(new File(s), String.class);
 
     }
-
-
-
 
 }
