@@ -24,7 +24,7 @@ public class Differ {
         mergeMap.addAll(map2.keySet());
 
         StringBuilder x = new StringBuilder();
-        x.append("\n").append("{");
+        x.append("{");
 
         for (String key : mergeMap) {
 
