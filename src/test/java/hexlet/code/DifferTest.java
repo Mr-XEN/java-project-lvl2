@@ -17,7 +17,9 @@ public class DifferTest {
     @Test
     public void testSum2() {
         final int expected = 9;
-        int actual = Differ.sum(3, 3);
+        final int x = 3;
+        final int z = 3;
+        int actual = Differ.sum(x, z);
 
         assertEquals(expected, actual);
     }
