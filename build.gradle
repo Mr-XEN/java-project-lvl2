@@ -40,11 +40,6 @@ dependencies {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport // report is always generated after tests run
-    testlogger
-}
-
-testlogger {
-    showStandardStreams true
 }
 
 jacocoTestReport {
@@ -52,23 +47,6 @@ jacocoTestReport {
         xml.required = true
     }
 }
-
-jacoco {
-    toolVersion = "0.8.7"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
-    applyTo run
-}
-
-tasks.register('applicationCodeCoverageReport', JacocoReport) {
-    executionData run
-    sourceSets sourceSets.main
-}
-
-
-
-
-
-
 
 group = 'hexlet.code'
 version = '1.0-SNAPSHOT'
