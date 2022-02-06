@@ -8,14 +8,15 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
 
 public class Differ {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
 
-    public static String file1 = "src/main/resources/file1.json";
-    public static String file2 = "src/main/resources/file2.json";
 
     public static String generate(Map<String, String> map1, Map<String, String> map2) {
 
@@ -64,6 +65,10 @@ public class Differ {
     public static String x(String s) throws IOException {
         return objectMapper.readValue(new File(s), String.class);
 
+    }
+
+    public static int sum(int a, int b) {
+        return a * b;
     }
 
 }

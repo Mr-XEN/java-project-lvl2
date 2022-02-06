@@ -25,16 +25,8 @@ public class App implements Callable<String> {
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]")
     private String format;
 
-
-    public static void main(String[] args) throws IOException {
-
-        int exitCode = new CommandLine(new App()).execute(args);
-        System.exit(exitCode);
-
-    }
-
     @Override
-    public String call() throws Exception {
+    public final String call() throws Exception {
 
         byte[] fileContents1 = Files.readAllBytes(filepath1.toPath());
         byte[] fileContents2 = Files.readAllBytes(filepath2.toPath());
@@ -47,4 +39,14 @@ public class App implements Callable<String> {
 
         return s;
     }
+
+
+    public static void main(String[] args) throws IOException {
+
+        int exitCode = new CommandLine(new App()).execute(args);
+        System.exit(exitCode);
+
+    }
+
+
 }
