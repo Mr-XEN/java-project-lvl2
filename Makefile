@@ -16,6 +16,9 @@ build:
 test:
 	./gradlew test
 
+report:
+	./gradlew jacocoTestReport
+
 
 
 
