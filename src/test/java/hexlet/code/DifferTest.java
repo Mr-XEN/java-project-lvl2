@@ -13,4 +13,12 @@ public class DifferTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testSum2() {
+        final int expected = 9;
+        int actual = Differ.sum(3, 3);
+
+        assertEquals(expected, actual);
+    }
 }
