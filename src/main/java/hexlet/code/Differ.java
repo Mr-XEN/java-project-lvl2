@@ -3,11 +3,10 @@ package hexlet.code;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -56,19 +55,6 @@ public class Differ {
             }
         });
 
-    }
-
-    public static String readFile(String file) throws IOException {
-        return new String(Files.readAllBytes(Paths.get(file)));
-    }
-
-    public static String x(String s) throws IOException {
-        return objectMapper.readValue(new File(s), String.class);
-
-    }
-
-    public static int sum(int a, int b) {
-        return a * b;
     }
 
 }

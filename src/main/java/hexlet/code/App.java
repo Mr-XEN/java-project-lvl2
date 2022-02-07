@@ -28,13 +28,11 @@ public class App implements Callable<String> {
     @Override
     public final String call() throws Exception {
 
-        byte[] fileContents1 = Files.readAllBytes(filepath1.toPath());
-        byte[] fileContents2 = Files.readAllBytes(filepath2.toPath());
-
-        Map<String, String> map1 = Differ.parse(fileContents1);
-        Map<String, String> map2 = Differ.parse(fileContents2);
+        Map<String, String> map1 = Differ.parse(Files.readAllBytes(filepath1.toPath()));
+        Map<String, String> map2 = Differ.parse(Files.readAllBytes(filepath2.toPath()));
 
         String s = Differ.generate(map1, map2);
+
         System.out.println(s);
 
         return s;
