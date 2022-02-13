@@ -1,12 +1,14 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.core.type.TypeReference;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+//import java.io.IOException;
+//import java.lang.reflect.Type;
+
+import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
-
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -14,10 +16,15 @@ import java.util.TreeSet;
 
 public class Differ {
 
-    private static ObjectMapper objectMapper = new ObjectMapper();
+    public static String run(File file1, File file2) throws IOException {
+        String file1Extension = getFileExtension(file1);
+        String file2Extension = getFileExtension(file2);
+        Map<String, String> map1 = Parser.fileToMap(file1, file1Extension);
+        Map<String, String> map2 = Parser.fileToMap(file2, file2Extension);
+        return generateReport(map1, map2);
+    }
 
-
-    public static String generate(Map<String, String> map1, Map<String, String> map2) {
+    public static String generateReport(Map<String, String> map1, Map<String, String> map2) {
 
         Set<String> mergeMap = new TreeSet<>();
         mergeMap.addAll(map1.keySet());
@@ -45,16 +52,16 @@ public class Differ {
         return x.toString();
     }
 
-
-    public static Map<String, String> parse(byte[] file) throws IOException {
-
-        return objectMapper.readValue(file, new TypeReference<>() {
-            @Override
-            public Type getType() {
-                return super.getType();
-            }
-        });
-
+    public static String getFileExtension(File file) {
+        String fileName = file.getName();
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
+        } else {
+            return "";
+        }
     }
+
+
+
 
 }

@@ -7,8 +7,6 @@ import picocli.CommandLine.Parameters;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "checksum 4.0",
@@ -28,14 +26,9 @@ public class App implements Callable<String> {
     @Override
     public final String call() throws Exception {
 
-        Map<String, String> map1 = Differ.parse(Files.readAllBytes(filepath1.toPath()));
-        Map<String, String> map2 = Differ.parse(Files.readAllBytes(filepath2.toPath()));
-
-        String s = Differ.generate(map1, map2);
-
-        System.out.println(s);
-
-        return s;
+        String result = Differ.run(filepath1, filepath2);
+        System.out.println(result);
+        return result;
     }
 
 
