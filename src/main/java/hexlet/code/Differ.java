@@ -10,6 +10,7 @@ package hexlet.code;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -19,12 +20,12 @@ public class Differ {
     public static String run(File file1, File file2) throws IOException {
         String file1Extension = getFileExtension(file1);
         String file2Extension = getFileExtension(file2);
-        Map<String, String> map1 = Parser.fileToMap(file1, file1Extension);
-        Map<String, String> map2 = Parser.fileToMap(file2, file2Extension);
+        Map<String, Object> map1 = Parser.fileToMap(file1, file1Extension);
+        Map<String, Object> map2 = Parser.fileToMap(file2, file2Extension);
         return generateReport(map1, map2);
     }
 
-    public static String generateReport(Map<String, String> map1, Map<String, String> map2) {
+    public static String generateReport(Map<String, Object> map1, Map<String, Object> map2) {
 
         Set<String> mergeMap = new TreeSet<>();
         mergeMap.addAll(map1.keySet());
@@ -39,7 +40,7 @@ public class Differ {
                 x.append("\n").append("  + ").append(key).append(": ").append(map2.get(key));
             } else if (!map2.containsKey(key)) {
                 x.append("\n").append("  - ").append(key).append(": ").append(map1.get(key));
-            } else if (map1.get(key).equals(map2.get(key))) {
+            } else if (Objects.equals(map1.get(key), map2.get(key))) {
                 x.append("\n").append("    ").append(key).append(": ").append(map1.get(key));
             } else {
                 x.append("\n").append("  - ").append(key).append(": ").append(map1.get(key));

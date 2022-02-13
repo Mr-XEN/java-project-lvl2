@@ -7,6 +7,7 @@ import picocli.CommandLine.Parameters;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "checksum 4.0",
@@ -33,6 +34,11 @@ public class App implements Callable<String> {
 
 
     public static void main(String[] args) throws IOException {
+
+        File filepath1 = new File("file12.json");
+        Map<String, Object> json = Parser.fileToMap(filepath1, "json");
+        System.out.println(json);
+
 
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
