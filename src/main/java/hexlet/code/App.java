@@ -7,7 +7,6 @@ import picocli.CommandLine.Parameters;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "checksum 4.0",
@@ -21,24 +20,21 @@ public class App implements Callable<String> {
     @Parameters(index = "1", description = "path to second file")
     private File filepath2;
 
-    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]")
+    @Option(names = {"-f", "--format"}, defaultValue = "stylish", description = "output format [default: stylish]")
     private String format;
 
     @Override
     public final String call() throws Exception {
 
-        String result = Differ.run(filepath1, filepath2);
-        System.out.println(result);
-        return result;
+        String diff = Differ.generate(filepath1, filepath2, format);
+//        String result = Differ.run(filepath1, filepath2);
+        System.out.println(diff);
+        return diff;
+
     }
 
 
     public static void main(String[] args) throws IOException {
-
-        File filepath1 = new File("file12.json");
-        Map<String, Object> json = Parser.fileToMap(filepath1, "json");
-        System.out.println(json);
-
 
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
