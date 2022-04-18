@@ -19,8 +19,7 @@ import java.util.TreeSet;
 
 public class Differ {
 
-
-    public static String generate(File filePath1, File filePath2, String formatName) throws IOException {
+    public static String generate(String filePath1, String filePath2, String formatName) throws IOException {
         String file1Extension = getFileExtension(filePath1);
         String file2Extension = getFileExtension(filePath2);
         Map<String, Object> map1 = Parser.fileToMap(filePath1, file1Extension);
@@ -29,7 +28,18 @@ public class Differ {
 
     }
 
-    public static String generate(File filePath1, File filePath2) throws IOException {
+
+
+//    public static String generate(File filePath1, File filePath2, String formatName) throws IOException {
+//        String file1Extension = getFileExtension(filePath1);
+//        String file2Extension = getFileExtension(filePath2);
+//        Map<String, Object> map1 = Parser.fileToMap(filePath1, file1Extension);
+//        Map<String, Object> map2 = Parser.fileToMap(filePath2, file2Extension);
+//        return Formatter.formatters(map1, map2, formatName);
+//
+//    }
+
+    public static String generate(String filePath1, String filePath2) throws IOException {
 
         String file1Extension = getFileExtension(filePath1);
         String file2Extension = getFileExtension(filePath2);
@@ -39,13 +49,13 @@ public class Differ {
     }
 
 
-    public static String run(File file1, File file2) throws IOException {
-        String file1Extension = getFileExtension(file1);
-        String file2Extension = getFileExtension(file2);
-        Map<String, Object> map1 = Parser.fileToMap(file1, file1Extension);
-        Map<String, Object> map2 = Parser.fileToMap(file2, file2Extension);
-        return stylish(map1, map2);
-    }
+//    public static String run(File file1, File file2) throws IOException {
+//        String file1Extension = getFileExtension(file1);
+//        String file2Extension = getFileExtension(file2);
+//        Map<String, Object> map1 = Parser.fileToMap(file1, file1Extension);
+//        Map<String, Object> map2 = Parser.fileToMap(file2, file2Extension);
+//        return stylish(map1, map2);
+//    }
 
     public static List<Map<String, Object>> generateDiff(Map<String, Object> map1, Map<String, Object> map2) {
 
@@ -123,6 +133,14 @@ public class Differ {
         String fileName = file.getName();
         if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
             return fileName.substring(fileName.lastIndexOf(".") + 1);
+        } else {
+            return "";
+        }
+    }
+
+    public static String getFileExtension(String file) {
+        if (file.lastIndexOf(".") != -1 && file.lastIndexOf(".") != 0) {
+            return file.substring(file.lastIndexOf(".") + 1);
         } else {
             return "";
         }
