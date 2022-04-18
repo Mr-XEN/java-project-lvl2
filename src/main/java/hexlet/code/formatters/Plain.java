@@ -65,7 +65,7 @@ public class Plain {
                         x.append(map2.get(s.getKey()));
                     }
 
-                    x.append("\n");
+//                    x.append("\n");
                 }
             }
         }
