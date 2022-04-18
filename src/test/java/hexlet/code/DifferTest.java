@@ -3,12 +3,15 @@ package hexlet.code;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 
 public class DifferTest {
@@ -16,9 +19,13 @@ public class DifferTest {
     private final Map<String, String> testMap1 = new HashMap<>();
     private final Map<String, String> testMap2 = new HashMap<>();
 
+    private final File file1 = new File("src/test/resources/testJson1.json");
+    private final File file2 = new File("src/test/resources/testJson2.json");
+
 
     @BeforeAll
     public static void beforeAll() {
+
     }
 
     @BeforeEach
@@ -32,9 +39,6 @@ public class DifferTest {
         testMap2.put("verbose", "true");
         testMap2.put("host", "hexlet.io");
 
-
-
-
     }
 
     @Test
@@ -43,9 +47,6 @@ public class DifferTest {
 
         File file = new File(path);
         String absolutePath = file.getAbsolutePath();
-
-        System.out.println(absolutePath);
-
         assertTrue(absolutePath.endsWith("src/test/resources"));
 
     }
@@ -68,19 +69,21 @@ public class DifferTest {
 //
 //    }
 //
-//    @Test
-//    public void differTest2() {
-//        String actual = Differ.generate(testMap1, testMap2);
-//        String expected = "{\n"
-//                          + "  - follow: false\n"
-//                          + "    host: hexlet.io\n"
-//                          + "  - proxy: 123.234.53.22\n"
-//                          + "  - timeout: 50\n"
-//                          + "  + timeout: 20\n"
-//                          + "  + verbose: true\n"
-//                          + "}";
-//        assertEquals(actual, expected);
-//    }
+    @Test
+    public void differTest2() throws IOException {
+
+
+        String actual = Differ.generate(file1, file2);
+        String expected = "{\n"
+                          + "  - follow: false\n"
+                          + "    host: hexlet.io\n"
+                          + "  - proxy: 123.234.53.22\n"
+                          + "  - timeout: 50\n"
+                          + "  + timeout: 20\n"
+                          + "  + verbose: true\n"
+                          + "}";
+        assertEquals(actual, expected);
+    }
 //
 //    @Test
 //    public void differTest3() {
