@@ -27,7 +27,6 @@ public class App implements Callable<String> {
     public final String call() throws Exception {
 
         String diff = Differ.generate(filepath1, filepath2, format);
-//        String result = Differ.run(filepath1, filepath2);
         System.out.println(diff);
         return diff;
 
