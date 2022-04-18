@@ -46,7 +46,7 @@ public class Stylish {
             }
         }
         x.append("}");
-        return x.toString();
+        return x.toString().trim();
 
     }
 }

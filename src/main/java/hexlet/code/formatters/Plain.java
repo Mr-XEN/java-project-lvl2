@@ -69,7 +69,7 @@ public class Plain {
                 }
             }
         }
-        return x.toString();
+        return x.toString().trim();
 
     }
 }
