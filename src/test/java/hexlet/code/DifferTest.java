@@ -51,24 +51,7 @@ public class DifferTest {
 
     }
 
-//    @Test
-//    public void whenArgsIsWrong() {
-//        byte[] wrong = {1, 2};
-//        Exception exception = assertThrows(JsonParseException.class, () -> Parser2.parseJson(wrong));
-//        String expectedMessage = "Illegal character";
-//        String actualMessage = exception.getMessage();
-//        assertTrue(actualMessage.contains(expectedMessage));
-//    }
 
-//    @Test
-//    public void differTest1() {
-//        String actual = Differ.generate(testMap1, testMap2);
-//        String expected = "io";
-//        System.out.println(actual);
-//        assertTrue(actual.contains(expected));
-//
-//    }
-//
     @Test
     public void differTest2() throws IOException {
 
@@ -84,15 +67,6 @@ public class DifferTest {
                           + "}";
         assertEquals(actual, expected);
     }
-//
-//    @Test
-//    public void differTest3() {
-//        String actual = Differ.generate(testMap1, testMap2);
-//        String expected = "{";
-//        assertTrue(actual.startsWith(expected));
-//    }
-
-
 
 }
 
