@@ -3,9 +3,12 @@ package hexlet.code;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +20,8 @@ public class DifferTest {
     private final Map<String, String> testMap1 = new HashMap<>();
     private final Map<String, String> testMap2 = new HashMap<>();
 
-    private final File file1 = new File("src/test/resources/testJson1.json");
-    private final File file2 = new File("src/test/resources/testJson2.json");
+    private final String file1 = String.valueOf(new File("src/test/resources/testJson1.json"));
+    private final String file2 = String.valueOf(new File("src/test/resources/testJson2.json"));
 
 
     @BeforeAll
@@ -50,21 +53,21 @@ public class DifferTest {
     }
 
 
-//    @Test
-//    public void differTest2() throws IOException {
-//
-//
-//        String actual = Differ.generate(file1, file2);
-//        String expected = "{\n"
-//                          + "  - follow: false\n"
-//                          + "    host: hexlet.io\n"
-//                          + "  - proxy: 123.234.53.22\n"
-//                          + "  - timeout: 50\n"
-//                          + "  + timeout: 20\n"
-//                          + "  + verbose: true\n"
-//                          + "}";
-//        assertEquals(actual, expected);
-//    }
+    @Test
+    public void differTest2() throws IOException {
+
+
+        String actual = Differ.generate(file1, file2);
+        String expected = "{\n"
+                          + "  - follow: false\n"
+                          + "    host: hexlet.io\n"
+                          + "  - proxy: 123.234.53.22\n"
+                          + "  - timeout: 50\n"
+                          + "  + timeout: 20\n"
+                          + "  + verbose: true\n"
+                          + "}";
+        assertEquals(actual, expected);
+    }
 
 }
 
