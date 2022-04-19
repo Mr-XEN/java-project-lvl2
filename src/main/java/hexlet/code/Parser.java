@@ -15,17 +15,6 @@ public class Parser {
 
     private static ObjectMapper objectMapperYaml = new ObjectMapper(new YAMLFactory());
 
-//    public static Map<String, Object> fileToMap(File file, String type) throws IOException {
-//
-//        if (type.equalsIgnoreCase("yaml") || type.equalsIgnoreCase("yml")) {
-//            return objectMapperYaml.readValue(file, new TypeReference<>() {
-//            });
-//        } else {
-//            return objectMapperJson.readValue(file, new TypeReference<>() {
-//            });
-//        }
-//    }
-
     public static Map<String, Object> fileToMap(String file2, String type) throws IOException {
 
         File file = new File(file2);
@@ -38,18 +27,5 @@ public class Parser {
             });
         }
     }
-
-
-//    public static Map<String, String> parseJson(File file) throws IOException {
-//
-//        return objectMapperJson.readValue(file, new TypeReference<>() {
-//        });
-//    }
-//
-//    public static Map<String, String> parseYaml(byte[] file) throws IOException {
-//
-//        return objectMapperYaml.readValue(file, new TypeReference<>() {
-//        });
-//    }
 
 }
