@@ -1,24 +1,14 @@
 package hexlet.code;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-
-
 
 public class DifferTest {
-
-    private final Map<String, String> testMap1 = new HashMap<>();
-    private final Map<String, String> testMap2 = new HashMap<>();
 
     private final String file1 = String.valueOf(new File("src/test/resources/testJson1.json"));
     private final String file2 = String.valueOf(new File("src/test/resources/testJson2.json"));
@@ -29,19 +19,6 @@ public class DifferTest {
 
     @BeforeAll
     public static void beforeAll() {
-
-    }
-
-    @BeforeEach
-    public final void beforeEach() {
-        testMap1.put("host", "hexlet.io");
-        testMap1.put("timeout", "50");
-        testMap1.put("proxy", "123.234.53.22");
-        testMap1.put("follow", "false");
-
-        testMap2.put("timeout", "20");
-        testMap2.put("verbose", "true");
-        testMap2.put("host", "hexlet.io");
 
     }
 
