@@ -38,29 +38,20 @@ public class Differ {
 
             Map<String, Object> res = new HashMap<>();
 
+            res.put("Field", key);
+            res.put("oldValue", map1.get(key));
+            res.put("newValue", map2.get(key));
+
             if (!map1.containsKey(key)) {
-                res.put("Field", key);
                 res.put("status", "added");
-                res.put("oldValue", map1.get(key));
-                res.put("newValue", map2.get(key));
             } else if (!map2.containsKey(key)) {
-                res.put("Field", key);
                 res.put("status", "deleted");
-                res.put("oldValue", map1.get(key));
-                res.put("newValue", map2.get(key));
             } else if (Objects.equals(map1.get(key), map2.get(key))) {
-                res.put("Field", key);
                 res.put("status", "unchanged");
-                res.put("oldValue", map1.get(key));
-                res.put("newValue", map2.get(key));
             } else {
-                res.put("Field", key);
                 res.put("status", "changed");
-                res.put("oldValue", map1.get(key));
-                res.put("newValue", map2.get(key));
             }
             temp.add(res);
-
         }
         return temp;
     }
