@@ -2,6 +2,7 @@ package hexlet.code;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -49,13 +50,31 @@ public class DifferTest {
         assertEquals(actual, expected);
     }
 
+//    @Test
+//    public void jsonFormatterTest() throws IOException {
+//
+//
+//        String actual = Differ.generate(file1, file2, "json");
+//        String expected = "[{\"follow\":\"deleted\"},{\"host\":\"unchanged\"},{\"proxy\":\"deleted\"},"
+//                          + "{\"timeout\":\"changed\"},{\"verbose\":\"added\"}]";
+//        assertEquals(actual, expected);
+//    }
+
     @Test
-    public void jsonFormatterTest() throws IOException {
+    public void jsonFormatterTest2() throws IOException {
 
 
         String actual = Differ.generate(file1, file2, "json");
-        String expected = "[{\"follow\":\"deleted\"},{\"host\":\"unchanged\"},{\"proxy\":\"deleted\"},"
-                          + "{\"timeout\":\"changed\"},{\"verbose\":\"added\"}]";
+        String expected = "[{\"Field\":\"follow\",\"newValue\":null,"
+                          + "\"oldValue\":false,\"status\":\"deleted\"},"
+                          + "{\"Field\":\"host\",\"newValue\":\"hexlet.io\","
+                          + "\"oldValue\":\"hexlet.io\",\"status\":\"unchanged\"},"
+                          + "{\"Field\":\"proxy\",\"newValue\":null,"
+                          + "\"oldValue\":\"123.234.53.22\",\"status\":\"deleted\"},"
+                          + "{\"Field\":\"timeout\",\"newValue\":20,"
+                          + "\"oldValue\":50,\"status\":\"changed\"},"
+                          + "{\"Field\":\"verbose\",\"newValue\":true,"
+                          + "\"oldValue\":null,\"status\":\"added\"}]";
         assertEquals(actual, expected);
     }
 

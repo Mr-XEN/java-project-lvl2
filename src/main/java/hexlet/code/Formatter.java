@@ -5,22 +5,21 @@ import hexlet.code.formatters.Json;
 import hexlet.code.formatters.Plain;
 import hexlet.code.formatters.Stylish;
 
+import java.util.List;
 import java.util.Map;
 
 public class Formatter {
 
-    public static String formatters(Map<String, Object> map1, Map<String, Object> map2, String formatter)
+    public static String formatters(List<Map<String, Object>> list, String formatter)
             throws JsonProcessingException {
         return switch (formatter) {
-            case "plain" -> Plain.plain(map1, map2);
-            case "json" -> Json.json(map1, map2);
-            default -> Stylish.stylish(map1, map2);
+            case "plain" -> Plain.plain(list);
+            case "json" -> Json.json(list);
+            default -> Stylish.stylish(list);
         };
     }
 
-    public static String formatters(Map<String, Object> map1, Map<String, Object> map2) {
-        return Stylish.stylish(map1, map2);
+    public static String formatters(List<Map<String, Object>> list) {
+        return Stylish.stylish(list);
     }
-
-
 }

@@ -1,74 +1,56 @@
 package hexlet.code.formatters;
 
-import hexlet.code.Differ;
 import java.util.List;
 import java.util.Map;
 
 public class Plain {
-    public static String plain(Map<String, Object> map1, Map<String, Object> map2) {
-        List<Map<String, Object>> superMap = Differ.generateDiff(map1, map2);
 
+    public static String plain(List<Map<String, Object>> list) {
         StringBuilder x = new StringBuilder();
 
-        for (Map<String, Object> stringObjectMap : superMap) {
-            for (Map.Entry<String, Object> s : stringObjectMap.entrySet()) {
-                if (stringObjectMap.containsValue("added")) {
-                    x.append("Property '")
-                            .append(s.getKey())
-                            .append("'")
-                            .append(" was added with value: ");
-                    if (map2.get(s.getKey()) instanceof String) {
-                        x.append("'")
-                                .append(map2.get(s.getKey()))
-                                .append("'")
-                                .append("\n");
-                    } else {
-                        x.append("[complex value]").append("\n");
-                    }
+        for (Map<String, Object> s : list) {
 
-                } else if (stringObjectMap.containsValue("deleted")) {
-                    x.append("Property '")
-                            .append(s.getKey())
-                            .append("'")
-                            .append(" was removed")
-                            .append("\n");
-                } else if (stringObjectMap.containsValue("changed")) {
-                    x.append("Property '")
-                            .append(s.getKey())
-                            .append("'")
-                            .append(" was updated. From ");
-                    if (map1.get(s.getKey()) instanceof String) {
-                        x.append("'")
-                                .append(map1.get(s.getKey()))
-                                .append("'");
-                    } else if (map1.get(s.getKey()) instanceof Boolean | map1.get(s.getKey()) instanceof Integer) {
-                        x.append(map1.get(s.getKey()));
-                    } else if (map1.get(s.getKey()) != null) {
-                        x.append("[complex value]");
-                    } else {
-                        x.append(map1.get(s.getKey()));
-                    }
+            String oldValue = objectToFormattedString(s.get("oldValue"));
+            String newValue = objectToFormattedString(s.get("newValue"));
 
-                    x.append(" to ");
-
-                    if (map2.get(s.getKey()) instanceof String) {
-                        x.append("'")
-                                .append(map2.get(s.getKey()))
-                                .append("'");
-                    } else if (map2.get(s.getKey()) instanceof Boolean
-                               | map2.get(s.getKey()) instanceof Integer) {
-                        x.append(map2.get(s.getKey()));
-                    } else if (map2.get(s.getKey()) != null) {
-                        x.append("[complex value]");
-                    } else {
-                        x.append(map2.get(s.getKey()));
-                    }
-
-                    x.append("\n");
-                }
+            if (s.containsValue("added")) {
+                x.append("Property '")
+                        .append(s.get("Field"))
+                        .append("'")
+                        .append(" was added with value: ")
+                        .append(newValue)
+                        .append("\n");
+            } else if (s.containsValue("deleted")) {
+                x.append("Property '")
+                        .append(s.get("Field"))
+                        .append("'")
+                        .append(" was removed")
+                        .append("\n");
+            } else if (s.containsValue("changed")) {
+                x.append("Property '")
+                        .append(s.get("Field"))
+                        .append("'")
+                        .append(" was updated. From ")
+                        .append(oldValue)
+                        .append(" to ")
+                        .append(newValue)
+                        .append("\n");
             }
         }
         return x.toString().trim();
+    }
 
+    private static String objectToFormattedString(Object o) {
+        String result;
+        if (o instanceof String) {
+            result = "'" + o + "'";
+        } else if (o instanceof Boolean | o instanceof Integer) {
+            result = "" + o;
+        } else if (o == null) {
+            result = "null";
+        } else {
+            result = "[complex value]";
+        }
+        return result;
     }
 }
