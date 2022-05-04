@@ -10,16 +10,14 @@ import java.util.Map;
 
 public class Formatter {
 
-    public static String formatters(List<Map<String, Object>> list, String formatter)
+    public static String format(List<Map<String, Object>> list, String formatter)
             throws JsonProcessingException {
         return switch (formatter) {
             case "plain" -> Plain.plain(list);
             case "json" -> Json.json(list);
-            default -> Stylish.stylish(list);
+            case "stylish" -> Stylish.stylish(list);
+            default -> throw new RuntimeException("Format option not supported");
         };
     }
 
-    public static String formatters(List<Map<String, Object>> list) {
-        return Stylish.stylish(list);
-    }
 }

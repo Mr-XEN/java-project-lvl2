@@ -4,9 +4,6 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 
 public class Parser {
@@ -15,17 +12,16 @@ public class Parser {
 
     private static ObjectMapper objectMapperYaml = new ObjectMapper(new YAMLFactory());
 
-    public static Map<String, Object> fileToMap(String file2, String type) throws IOException {
+    public static Map<String, Object> fileToMap(String context, String format) throws Exception {
 
-        File file = new File(file2);
+        return switch (format) {
+            case "json" -> objectMapperJson.readValue(context, new TypeReference<>() {
+            });
+            case "yml", "yaml" -> objectMapperYaml.readValue(context, new TypeReference<>() {
+            });
+            default -> throw new Exception();
+        };
 
-        if (type.equalsIgnoreCase("yaml") || type.equalsIgnoreCase("yml")) {
-            return objectMapperYaml.readValue(file, new TypeReference<>() {
-            });
-        } else {
-            return objectMapperJson.readValue(file, new TypeReference<>() {
-            });
-        }
     }
 
 }

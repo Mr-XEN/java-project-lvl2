@@ -1,6 +1,8 @@
 package hexlet.code;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,16 +14,19 @@ import java.util.TreeSet;
 
 public class Differ {
 
-    public static String generate(String filePath1, String filePath2, String formatName) throws IOException {
+    public static String generate(String filePath1, String filePath2, String formatName) throws Exception {
         String file1Extension = getFileExtension(filePath1);
         String file2Extension = getFileExtension(filePath2);
-        Map<String, Object> map1 = Parser.fileToMap(filePath1, file1Extension);
-        Map<String, Object> map2 = Parser.fileToMap(filePath2, file2Extension);
-        return Formatter.formatters(generateDiff(map1, map2), formatName);
+        String file1Context = fileToString(filePath1);
+        String file2Context = fileToString(filePath2);
+
+        Map<String, Object> map1 = Parser.fileToMap(file1Context, file1Extension);
+        Map<String, Object> map2 = Parser.fileToMap(file2Context, file2Extension);
+        return Formatter.format(generateDiff(map1, map2), formatName);
 
     }
 
-    public static String generate(String filePath1, String filePath2) throws IOException {
+    public static String generate(String filePath1, String filePath2) throws Exception {
         return generate(filePath1, filePath2, "stylish");
     }
 
@@ -62,5 +67,11 @@ public class Differ {
         } else {
             return "";
         }
+    }
+
+    public static String fileToString(String pathToFile) throws IOException {
+
+        return Files.readString(Path.of(pathToFile));
+
     }
 }
