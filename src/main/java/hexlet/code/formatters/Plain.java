@@ -6,30 +6,30 @@ import java.util.Map;
 
 public class Plain {
 
-    public static String plain(List<Map<String, Object>> list) {
-        StringBuilder x = new StringBuilder();
+    public static String plain(List<Map<String, Object>> diff) {
+        StringBuilder builder = new StringBuilder();
 
-        for (Map<String, Object> s : list) {
+        for (Map<String, Object> node : diff) {
 
-            String oldValue = objectToFormattedString(s.get("oldValue"));
-            String newValue = objectToFormattedString(s.get("newValue"));
+            String oldValue = objectToFormattedString(node.get("oldValue"));
+            String newValue = objectToFormattedString(node.get("newValue"));
 
-            if (s.containsValue("added")) {
-                x.append("Property '")
-                        .append(s.get("Field"))
+            if (node.get("status").equals("added")) {
+                builder.append("Property '")
+                        .append(node.get("Field"))
                         .append("'")
                         .append(" was added with value: ")
                         .append(newValue)
                         .append("\n");
-            } else if (s.containsValue("deleted")) {
-                x.append("Property '")
-                        .append(s.get("Field"))
+            } else if (node.get("status").equals("deleted")) {
+                builder.append("Property '")
+                        .append(node.get("Field"))
                         .append("'")
                         .append(" was removed")
                         .append("\n");
-            } else if (s.containsValue("changed")) {
-                x.append("Property '")
-                        .append(s.get("Field"))
+            } else if (node.get("status").equals("changed")) {
+                builder.append("Property '")
+                        .append(node.get("Field"))
                         .append("'")
                         .append(" was updated. From ")
                         .append(oldValue)
@@ -38,7 +38,7 @@ public class Plain {
                         .append("\n");
             }
         }
-        return x.toString().trim();
+        return builder.toString().trim();
     }
 
     public static String objectToFormattedString(Object o) {

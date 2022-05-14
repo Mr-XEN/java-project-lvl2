@@ -4,44 +4,85 @@ import java.util.List;
 import java.util.Map;
 
 public class Stylish {
-    public static String stylish(List<Map<String, Object>> list) {
+    public static String stylish(List<Map<String, Object>> diff) {
 
-        StringBuilder x = new StringBuilder();
-        x.append("{\n");
+        StringBuilder builder = new StringBuilder();
+        builder.append("{\n");
 
-        for (Map<String, Object> s : list) {
-            if (s.containsValue("added")) {
-                x.append("  + ")
-                        .append(s.get("Field"))
+        for (Map<String, Object> node : diff) {
+            if (node.get("status").equals("added")) {
+                builder.append("  + ")
+                        .append(node.get("Field"))
                         .append(": ")
-                        .append(s.get("newValue"))
+                        .append(node.get("newValue"))
                         .append("\n");
-            } else if (s.containsValue("deleted")) {
-                x.append("  - ")
-                        .append(s.get("Field"))
+            } else if (node.get("status").equals("deleted")) {
+                builder.append("  - ")
+                        .append(node.get("Field"))
                         .append(": ")
-                        .append(s.get("oldValue"))
+                        .append(node.get("oldValue"))
                         .append("\n");
-            } else if (s.containsValue("unchanged")) {
-                x.append("    ")
-                        .append(s.get("Field"))
+            } else if (node.get("status").equals("unchanged")) {
+                builder.append("    ")
+                        .append(node.get("Field"))
                         .append(": ")
-                        .append(s.get("oldValue"))
+                        .append(node.get("oldValue"))
                         .append("\n");
-            } else if (s.containsValue("changed")) {
-                x.append("  - ")
-                        .append(s.get("Field"))
+            } else if (node.get("status").equals("changed")) {
+                builder.append("  - ")
+                        .append(node.get("Field"))
                         .append(": ")
-                        .append(s.get("oldValue"))
+                        .append(node.get("oldValue"))
                         .append("\n")
                         .append("  + ")
-                        .append(s.get("Field"))
+                        .append(node.get("Field"))
                         .append(": ")
-                        .append(s.get("newValue"))
+                        .append(node.get("newValue"))
                         .append("\n");
             }
         }
-        x.append("}");
-        return x.toString();
+        builder.append("}");
+        return builder.toString();
     }
+
+//    public static String stylish(List<Map<String, Object>> diff) {
+//
+//        StringBuilder builder = new StringBuilder();
+//        builder.append("{\n");
+//
+//        for (Map<String, Object> node : diff) {
+//            if (node.containsValue("added")) {
+//                builder.append("  + ")
+//                        .append(node.get("Field"))
+//                        .append(": ")
+//                        .append(node.get("newValue"))
+//                        .append("\n");
+//            } else if (node.containsValue("deleted")) {
+//                builder.append("  - ")
+//                        .append(node.get("Field"))
+//                        .append(": ")
+//                        .append(node.get("oldValue"))
+//                        .append("\n");
+//            } else if (node.containsValue("unchanged")) {
+//                builder.append("    ")
+//                        .append(node.get("Field"))
+//                        .append(": ")
+//                        .append(node.get("oldValue"))
+//                        .append("\n");
+//            } else if (node.containsValue("changed")) {
+//                builder.append("  - ")
+//                        .append(node.get("Field"))
+//                        .append(": ")
+//                        .append(node.get("oldValue"))
+//                        .append("\n")
+//                        .append("  + ")
+//                        .append(node.get("Field"))
+//                        .append(": ")
+//                        .append(node.get("newValue"))
+//                        .append("\n");
+//            }
+//        }
+//        builder.append("}");
+//        return builder.toString();
+//    }
 }

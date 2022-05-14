@@ -1,4 +1,0 @@
----
-timeout: ["a", "b", "c"]
-verbose: ["value1", "value2"]
-host: hexlet.io

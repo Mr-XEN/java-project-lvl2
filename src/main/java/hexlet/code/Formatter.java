@@ -10,12 +10,12 @@ import java.util.Map;
 
 public class Formatter {
 
-    public static String format(List<Map<String, Object>> list, String formatter)
+    public static String format(List<Map<String, Object>> diff, String formatter)
             throws JsonProcessingException {
         return switch (formatter) {
-            case "plain" -> Plain.plain(list);
-            case "json" -> Json.json(list);
-            case "stylish" -> Stylish.stylish(list);
+            case "plain" -> Plain.plain(diff);
+            case "json" -> Json.json(diff);
+            case "stylish" -> Stylish.stylish(diff);
             default -> throw new RuntimeException("Format option not supported");
         };
     }

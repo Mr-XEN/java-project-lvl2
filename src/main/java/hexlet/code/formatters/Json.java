@@ -10,7 +10,7 @@ public class Json {
 
     private static ObjectMapper objectMapperJson = new ObjectMapper(new JsonFactory());
 
-    public static String json(List<Map<String, Object>> list) throws JsonProcessingException {
-        return objectMapperJson.writeValueAsString(list);
+    public static String json(List<Map<String, Object>> diff) throws JsonProcessingException {
+        return objectMapperJson.writeValueAsString(diff);
     }
 }
